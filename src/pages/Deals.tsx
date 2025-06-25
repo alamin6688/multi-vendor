@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/footer/Footer";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Deal {
   id: number;
@@ -27,108 +28,8 @@ interface Deal {
 const Deals = () => {
   const [isDark, setIsDark] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-
-  const deals: Deal[] = [
-    {
-      id: 1,
-      name: "Wireless Gaming Headset Pro",
-      originalPrice: 199,
-      salePrice: 99,
-      discount: 50,
-      rating: 4.8,
-      reviews: 324,
-      image: "🎧",
-      category: "Gaming",
-      vendor: "TechZone Pro",
-      stock: 25,
-      sold: 175,
-      endTime: new Date(Date.now() + 8 * 60 * 60 * 1000), // 8 hours from now
-      badge: "HOT",
-      isFlashSale: true,
-    },
-    {
-      id: 2,
-      name: "Smart Fitness Watch",
-      originalPrice: 299,
-      salePrice: 179,
-      discount: 40,
-      rating: 4.9,
-      reviews: 567,
-      image: "⌚",
-      category: "Wearables",
-      vendor: "GadgetHub",
-      stock: 12,
-      sold: 88,
-      endTime: new Date(Date.now() + 6 * 60 * 60 * 1000), // 6 hours from now
-      badge: "LIMITED",
-      isFlashSale: true,
-    },
-    {
-      id: 3,
-      name: "Premium Coffee Machine",
-      originalPrice: 399,
-      salePrice: 249,
-      discount: 38,
-      rating: 4.7,
-      reviews: 234,
-      image: "☕",
-      category: "Home & Kitchen",
-      vendor: "Home Essentials",
-      stock: 45,
-      sold: 155,
-      endTime: new Date(Date.now() + 12 * 60 * 60 * 1000), // 12 hours from now
-      badge: "BESTSELLER",
-    },
-    {
-      id: 4,
-      name: "Mechanical Gaming Keyboard",
-      originalPrice: 159,
-      salePrice: 89,
-      discount: 44,
-      rating: 4.6,
-      reviews: 445,
-      image: "⌨️",
-      category: "Gaming",
-      vendor: "TechZone Pro",
-      stock: 8,
-      sold: 92,
-      endTime: new Date(Date.now() + 4 * 60 * 60 * 1000), // 4 hours from now
-      badge: "FLASH",
-      isFlashSale: true,
-    },
-    {
-      id: 5,
-      name: "Wireless Phone Charger",
-      originalPrice: 79,
-      salePrice: 39,
-      discount: 51,
-      rating: 4.4,
-      reviews: 189,
-      image: "🔋",
-      category: "Accessories",
-      vendor: "GadgetHub",
-      stock: 67,
-      sold: 233,
-      endTime: new Date(Date.now() + 18 * 60 * 60 * 1000), // 18 hours from now
-      badge: "HOT",
-    },
-    {
-      id: 6,
-      name: "Smart Home Speaker",
-      originalPrice: 149,
-      salePrice: 79,
-      discount: 47,
-      rating: 4.5,
-      reviews: 323,
-      image: "🔊",
-      category: "Smart Home",
-      vendor: "Home Essentials",
-      stock: 15,
-      sold: 85,
-      endTime: new Date(Date.now() + 10 * 60 * 60 * 1000), // 10 hours from now
-      badge: "LIMITED",
-    },
-  ];
+  const [loading, setLoading] = useState(true);
+  const [deals, setDeals] = useState<Deal[]>([]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -136,6 +37,114 @@ const Deals = () => {
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setDeals([
+        {
+          id: 1,
+          name: "Wireless Gaming Headset Pro",
+          originalPrice: 199,
+          salePrice: 99,
+          discount: 50,
+          rating: 4.8,
+          reviews: 324,
+          image: "🎧",
+          category: "Gaming",
+          vendor: "TechZone Pro",
+          stock: 25,
+          sold: 175,
+          endTime: new Date(Date.now() + 8 * 60 * 60 * 1000), // 8 hours from now
+          badge: "HOT",
+          isFlashSale: true,
+        },
+        {
+          id: 2,
+          name: "Smart Fitness Watch",
+          originalPrice: 299,
+          salePrice: 179,
+          discount: 40,
+          rating: 4.9,
+          reviews: 567,
+          image: "⌚",
+          category: "Wearables",
+          vendor: "GadgetHub",
+          stock: 12,
+          sold: 88,
+          endTime: new Date(Date.now() + 6 * 60 * 60 * 1000), // 6 hours from now
+          badge: "LIMITED",
+          isFlashSale: true,
+        },
+        {
+          id: 3,
+          name: "Premium Coffee Machine",
+          originalPrice: 399,
+          salePrice: 249,
+          discount: 38,
+          rating: 4.7,
+          reviews: 234,
+          image: "☕",
+          category: "Home & Kitchen",
+          vendor: "Home Essentials",
+          stock: 45,
+          sold: 155,
+          endTime: new Date(Date.now() + 12 * 60 * 60 * 1000), // 12 hours from now
+          badge: "BESTSELLER",
+        },
+        {
+          id: 4,
+          name: "Mechanical Gaming Keyboard",
+          originalPrice: 159,
+          salePrice: 89,
+          discount: 44,
+          rating: 4.6,
+          reviews: 445,
+          image: "⌨️",
+          category: "Gaming",
+          vendor: "TechZone Pro",
+          stock: 8,
+          sold: 92,
+          endTime: new Date(Date.now() + 4 * 60 * 60 * 1000), // 4 hours from now
+          badge: "FLASH",
+          isFlashSale: true,
+        },
+        {
+          id: 5,
+          name: "Wireless Phone Charger",
+          originalPrice: 79,
+          salePrice: 39,
+          discount: 51,
+          rating: 4.4,
+          reviews: 189,
+          image: "🔋",
+          category: "Accessories",
+          vendor: "GadgetHub",
+          stock: 67,
+          sold: 233,
+          endTime: new Date(Date.now() + 18 * 60 * 60 * 1000), // 18 hours from now
+          badge: "HOT",
+        },
+        {
+          id: 6,
+          name: "Smart Home Speaker",
+          originalPrice: 149,
+          salePrice: 79,
+          discount: 47,
+          rating: 4.5,
+          reviews: 323,
+          image: "🔊",
+          category: "Smart Home",
+          vendor: "Home Essentials",
+          stock: 15,
+          sold: 85,
+          endTime: new Date(Date.now() + 10 * 60 * 60 * 1000), // 10 hours from now
+          badge: "LIMITED",
+        },
+      ]);
+      setLoading(false);
+    }, 400);
   }, []);
 
   const toggleTheme = () => {
@@ -220,149 +229,178 @@ const Deals = () => {
 
           {/* Deals Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {deals.map((deal) => {
-              const timeRemaining = getTimeRemaining(deal.endTime);
-              const stockPercentage =
-                (deal.stock / (deal.stock + deal.sold)) * 100;
-
-              return (
-                <Card
-                  key={deal.id}
-                  className={`${
-                    isDark
-                      ? "bg-slate-800/50 border-slate-700"
-                      : "bg-white/70 border-orange-100"
-                  } backdrop-blur-lg hover:scale-105 transition-all duration-300 overflow-hidden group`}
-                >
-                  <div className="relative">
-                    <div
-                      className={`aspect-square ${
-                        isDark ? "bg-slate-700" : "bg-orange-50"
-                      } flex items-center justify-center text-6xl group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      {deal.image}
+            {loading
+              ? Array.from({ length: 6 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={`rounded-xl overflow-hidden ${
+                      isDark
+                        ? "bg-slate-800/50 border-slate-700"
+                        : "bg-white/70 border-orange-100"
+                    } border backdrop-blur-lg p-4`}
+                  >
+                    <Skeleton className="aspect-square w-full mb-4" />
+                    <Skeleton className="h-6 w-3/4 mb-2" />
+                    <Skeleton className="h-4 w-1/2 mb-2" />
+                    <Skeleton className="h-4 w-1/3 mb-2" />
+                    <div className="flex space-x-2 mb-2">
+                      <Skeleton className="h-4 w-12" />
+                      <Skeleton className="h-4 w-12" />
                     </div>
-
-                    {/* Discount Badge */}
-                    <Badge className="absolute top-2 left-2 bg-red-500 text-white font-bold">
-                      -{deal.discount}%
-                    </Badge>
-
-                    {/* Deal Badge */}
-                    <Badge
-                      className={`absolute top-2 right-2 ${getBadgeColor(
-                        deal.badge
-                      )} text-white font-bold flex items-center space-x-1`}
-                    >
-                      {getBadgeIcon(deal.badge)}
-                      <span>{deal.badge}</span>
-                    </Badge>
+                    <Skeleton className="h-4 w-1/2" />
                   </div>
+                ))
+              : deals.map((deal) => {
+                  const timeRemaining = getTimeRemaining(deal.endTime);
+                  const stockPercentage =
+                    (deal.stock / (deal.stock + deal.sold)) * 100;
 
-                  <CardContent className="p-4">
-                    <h3
-                      className={`font-semibold mb-2 ${
-                        isDark ? "text-white" : "text-slate-900"
-                      }`}
+                  return (
+                    <Card
+                      key={deal.id}
+                      className={`${
+                        isDark
+                          ? "bg-slate-800/50 border-slate-700"
+                          : "bg-white/70 border-orange-100"
+                      } backdrop-blur-lg hover:scale-105 transition-all duration-300 overflow-hidden group`}
                     >
-                      {deal.name}
-                    </h3>
+                      <div className="relative">
+                        <div
+                          className={`aspect-square ${
+                            isDark ? "bg-slate-700" : "bg-orange-50"
+                          } flex items-center justify-center text-6xl group-hover:scale-110 transition-transform duration-300`}
+                        >
+                          {deal.image}
+                        </div>
 
-                    <p
-                      className={`text-sm mb-2 ${
-                        isDark ? "text-slate-400" : "text-slate-500"
-                      }`}
-                    >
-                      by {deal.vendor}
-                    </p>
+                        {/* Discount Badge */}
+                        <Badge className="absolute top-2 left-2 bg-red-500 text-white font-bold">
+                          -{deal.discount}%
+                        </Badge>
 
-                    <div className="flex items-center space-x-1 mb-3">
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`h-3 w-3 ${
-                              i < Math.floor(deal.rating)
-                                ? "fill-yellow-400 text-yellow-400"
-                                : "text-gray-300"
-                            }`}
-                          />
-                        ))}
+                        {/* Deal Badge */}
+                        <Badge
+                          className={`absolute top-2 right-2 ${getBadgeColor(
+                            deal.badge
+                          )} text-white font-bold flex items-center space-x-1`}
+                        >
+                          {getBadgeIcon(deal.badge)}
+                          <span>{deal.badge}</span>
+                        </Badge>
                       </div>
-                      <span
-                        className={`text-xs ${
-                          isDark ? "text-slate-400" : "text-slate-500"
-                        }`}
-                      >
-                        ({deal.reviews})
-                      </span>
-                    </div>
 
-                    <div className="flex items-center space-x-2 mb-3">
-                      <span
-                        className={`text-2xl font-bold ${
-                          isDark ? "text-white" : "text-slate-900"
-                        }`}
-                      >
-                        ${deal.salePrice}
-                      </span>
-                      <span
-                        className={`text-lg line-through ${
-                          isDark ? "text-slate-400" : "text-slate-500"
-                        }`}
-                      >
-                        ${deal.originalPrice}
-                      </span>
-                    </div>
+                      <CardContent className="p-4">
+                        <h3
+                          className={`font-semibold mb-2 ${
+                            isDark ? "text-white" : "text-slate-900"
+                          }`}
+                        >
+                          {deal.name}
+                        </h3>
 
-                    {/* Countdown Timer */}
-                    {deal.isFlashSale && timeRemaining.total > 0 && (
-                      <div className="mb-3 p-2 bg-red-100 dark:bg-red-900/30 rounded-lg">
-                        <div className="flex items-center justify-center space-x-1 text-red-600 dark:text-red-400">
-                          <Clock className="h-4 w-4" />
-                          <span className="text-sm font-semibold">
-                            {timeRemaining.hours.toString().padStart(2, "0")}:
-                            {timeRemaining.minutes.toString().padStart(2, "0")}:
-                            {timeRemaining.seconds.toString().padStart(2, "0")}
+                        <p
+                          className={`text-sm mb-2 ${
+                            isDark ? "text-slate-400" : "text-slate-500"
+                          }`}
+                        >
+                          by {deal.vendor}
+                        </p>
+
+                        <div className="flex items-center space-x-1 mb-3">
+                          <div className="flex">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`h-3 w-3 ${
+                                  i < Math.floor(deal.rating)
+                                    ? "fill-yellow-400 text-yellow-400"
+                                    : "text-gray-300"
+                                }`}
+                              />
+                            ))}
+                          </div>
+                          <span
+                            className={`text-xs ${
+                              isDark ? "text-slate-400" : "text-slate-500"
+                            }`}
+                          >
+                            ({deal.reviews})
                           </span>
                         </div>
-                      </div>
-                    )}
 
-                    {/* Stock Progress */}
-                    <div className="mb-4">
-                      <div className="flex justify-between text-xs mb-1">
-                        <span
-                          className={`${
-                            isDark ? "text-slate-400" : "text-slate-500"
-                          }`}
-                        >
-                          {deal.sold} sold
-                        </span>
-                        <span
-                          className={`${
-                            isDark ? "text-slate-400" : "text-slate-500"
-                          }`}
-                        >
-                          {deal.stock} left
-                        </span>
-                      </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-gradient-to-r from-orange-400 to-red-500 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${100 - stockPercentage}%` }}
-                        ></div>
-                      </div>
-                    </div>
+                        <div className="flex items-center space-x-2 mb-3">
+                          <span
+                            className={`text-2xl font-bold ${
+                              isDark ? "text-white" : "text-slate-900"
+                            }`}
+                          >
+                            ${deal.salePrice}
+                          </span>
+                          <span
+                            className={`text-lg line-through ${
+                              isDark ? "text-slate-400" : "text-slate-500"
+                            }`}
+                          >
+                            ${deal.originalPrice}
+                          </span>
+                        </div>
 
-                    <Button className="w-full bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-semibold">
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      Grab Deal Now
-                    </Button>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                        {/* Countdown Timer */}
+                        {deal.isFlashSale && timeRemaining.total > 0 && (
+                          <div className="mb-3 p-2 bg-red-100 dark:bg-red-900/30 rounded-lg">
+                            <div className="flex items-center justify-center space-x-1 text-red-600 dark:text-red-400">
+                              <Clock className="h-4 w-4" />
+                              <span className="text-sm font-semibold">
+                                {timeRemaining.hours
+                                  .toString()
+                                  .padStart(2, "0")}
+                                :
+                                {timeRemaining.minutes
+                                  .toString()
+                                  .padStart(2, "0")}
+                                :
+                                {timeRemaining.seconds
+                                  .toString()
+                                  .padStart(2, "0")}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Stock Progress */}
+                        <div className="mb-4">
+                          <div className="flex justify-between text-xs mb-1">
+                            <span
+                              className={`${
+                                isDark ? "text-slate-400" : "text-slate-500"
+                              }`}
+                            >
+                              {deal.sold} sold
+                            </span>
+                            <span
+                              className={`${
+                                isDark ? "text-slate-400" : "text-slate-500"
+                              }`}
+                            >
+                              {deal.stock} left
+                            </span>
+                          </div>
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div
+                              className="bg-gradient-to-r from-orange-400 to-red-500 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${100 - stockPercentage}%` }}
+                            ></div>
+                          </div>
+                        </div>
+
+                        <Button className="w-full bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-semibold">
+                          <ShoppingCart className="h-4 w-4 mr-2" />
+                          Grab Deal Now
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
           </div>
 
           {/* Load More Section */}

@@ -8,7 +8,7 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Vendors from "./pages/Vendors";
 import Deals from "./pages/Deals";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/error/NotFound";
 
 const queryClient = new QueryClient();
 

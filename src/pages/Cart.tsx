@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Plus, Minus, Trash2, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,24 +9,42 @@ import Navigation from "@/components/Navigation";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Wireless Earbuds Pro",
-      price: 299,
-      quantity: 2,
-      image: "🎧",
-      vendor: "TechZone Pro",
-    },
-    {
-      id: 2,
-      name: "Smart Watch Series X",
-      price: 449,
-      quantity: 1,
-      image: "⌚",
-      vendor: "GadgetHub",
-    },
-  ]);
+  interface CartItem {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    image: string;
+    vendor: string;
+  }
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    // Simulate async fetch (replace with real API call later)
+    setTimeout(() => {
+      setCartItems([
+        {
+          id: 1,
+          name: "Wireless Earbuds Pro",
+          price: 299,
+          quantity: 2,
+          image: "🎧",
+          vendor: "TechZone Pro",
+        },
+        {
+          id: 2,
+          name: "Smart Watch Series X",
+          price: 449,
+          quantity: 1,
+          image: "⌚",
+          vendor: "GadgetHub",
+        },
+      ]);
+      setLoading(false);
+    }, 400);
+  }, []);
 
   const updateQuantity = (id: number, change: number) => {
     setCartItems((items) =>
@@ -70,7 +88,25 @@ const Cart = () => {
               Shopping Cart
             </h1>
 
-            {cartItems.length === 0 ? (
+            {loading ? (
+              Array.from({ length: 2 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="bg-white/70 border-blue-100 backdrop-blur-lg rounded-xl p-6 flex items-center space-x-4"
+                >
+                  <div className="w-20 h-20 bg-blue-100 rounded-lg animate-pulse" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-6 w-32 bg-blue-100 rounded animate-pulse" />
+                    <div className="h-4 w-20 bg-blue-100 rounded animate-pulse" />
+                    <div className="h-5 w-16 bg-blue-100 rounded animate-pulse" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <div className="h-8 w-8 bg-blue-100 rounded animate-pulse" />
+                    <div className="h-8 w-8 bg-blue-100 rounded animate-pulse" />
+                  </div>
+                </div>
+              ))
+            ) : cartItems.length === 0 ? (
               <Card className="bg-white/70 border-blue-100 backdrop-blur-lg">
                 <CardContent className="p-12 text-center">
                   <ShoppingBag className="h-16 w-16 text-slate-400 mx-auto mb-4" />
@@ -99,7 +135,6 @@ const Cart = () => {
                       <div className="w-20 h-20 bg-blue-50 rounded-lg flex items-center justify-center text-3xl">
                         {item.image}
                       </div>
-
                       <div className="flex-1">
                         <h3 className="font-semibold text-slate-900">
                           {item.name}
