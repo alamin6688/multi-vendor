@@ -77,7 +77,7 @@ const ProductsSection = ({
       : categories.find((c) => c.id === selectedCategory)?.name;
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="pt-6 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-12">
           <h2

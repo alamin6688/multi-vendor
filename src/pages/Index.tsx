@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import VendorsSection from "@/components/VendorsSection";
+import { TrendingCategories } from "@/components/TrendingCategories";
 import ProductsSection from "@/components/ProductsSection";
 import Footer from "@/components/footer/Footer";
+import BestDeals from "@/components/BestDeals";
+import QuickStats from "@/components/QuickStats";
 
 const Index = () => {
   const [isDark, setIsDark] = useState(false);
@@ -44,6 +47,11 @@ const Index = () => {
         onCategoryChange={setSelectedCategory}
       />
 
+      <TrendingCategories
+        isDark={isDark}
+        onCategoryClick={setSelectedCategory}
+      />
+
       <VendorsSection vendors={[]} isDark={isDark} />
 
       <ProductsSection
@@ -52,6 +60,10 @@ const Index = () => {
         onProductClick={handleProductClick}
         onAddToCart={handleAddToCart}
       />
+
+      <QuickStats isDark={isDark} />
+
+      <BestDeals isDark={isDark} />
 
       <Footer isDark={isDark} toggleTheme={toggleTheme} />
     </div>
