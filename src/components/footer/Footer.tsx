@@ -71,7 +71,9 @@ const Footer: React.FC<FooterProps> = ({ isDark, toggleTheme }) => {
   return (
     <footer
       className={`w-full border-t ${
-        isDark ? "bg-slate-900 border-slate-700" : "bg-white/80 border-blue-100"
+        isDark
+          ? "bg-slate-900 border-slate-700"
+          : "bg-[#13293d] border-blue-300"
       } bg-[radial-gradient(35%_128px_at_50%_0%,theme(backgroundColor.white/8%),transparent)] px-0 py-0`}
     >
       <div className="w-full flex justify-center">
@@ -84,7 +86,7 @@ const Footer: React.FC<FooterProps> = ({ isDark, toggleTheme }) => {
             className={`absolute top-4 right-4 p-2 rounded-full border ${
               isDark
                 ? "bg-slate-800 border-slate-600 text-white hover:bg-slate-700"
-                : "bg-white border-blue-200 text-slate-700 hover:bg-blue-50"
+                : "bg-[#13293d] border-blue-200 text-white hover:bg-[#1b3c5d]"
             } transition-colors`}
             aria-label="Toggle theme"
           >
@@ -97,8 +99,16 @@ const Footer: React.FC<FooterProps> = ({ isDark, toggleTheme }) => {
 
           <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
             <AnimatedContainer className="space-y-4">
-              <FrameIcon className="size-8" />
-              <p className="text-muted-foreground mt-8 text-sm md:mt-0">
+              <FrameIcon
+                className={isDark ? "size-8 text-white" : "size-8 text-white"}
+              />
+              <p
+                className={
+                  isDark
+                    ? "text-muted-foreground mt-8 text-sm md:mt-0"
+                    : "text-white/80 mt-8 text-sm md:mt-0"
+                }
+              >
                 © {new Date().getFullYear()} Asme. All rights reserved.
               </p>
             </AnimatedContainer>
@@ -110,15 +120,37 @@ const Footer: React.FC<FooterProps> = ({ isDark, toggleTheme }) => {
                   delay={0.1 + index * 0.1}
                 >
                   <div className="mb-10 md:mb-0">
-                    <h3 className="text-xs">{section.label}</h3>
-                    <ul className="text-muted-foreground mt-4 space-y-2 text-sm">
+                    <h3
+                      className={isDark ? "text-xs" : "text-xs text-white/90"}
+                    >
+                      {section.label}
+                    </h3>
+                    <ul
+                      className={
+                        isDark
+                          ? "text-muted-foreground mt-4 space-y-2 text-sm"
+                          : "text-white/80 mt-4 space-y-2 text-sm"
+                      }
+                    >
                       {section.links.map((link) => (
                         <li key={link.title}>
                           <a
                             href={link.href}
-                            className="hover:text-foreground inline-flex items-center transition-all duration-300"
+                            className={
+                              isDark
+                                ? "hover:text-foreground inline-flex items-center transition-all duration-300"
+                                : "hover:text-white text-white inline-flex items-center transition-all duration-300"
+                            }
                           >
-                            {link.icon && <link.icon className="me-1 size-4" />}
+                            {link.icon && (
+                              <link.icon
+                                className={
+                                  isDark
+                                    ? "me-1 size-4"
+                                    : "me-1 size-4 text-white"
+                                }
+                              />
+                            )}
                             {link.title}
                           </a>
                         </li>

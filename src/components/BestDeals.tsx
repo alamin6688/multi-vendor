@@ -56,7 +56,7 @@ const BestDeals = ({ isDark }: { isDark: boolean }) => {
   return (
     <section
       className={`py-16 ${
-        isDark ? "bg-slate-900" : "bg-gradient-to-br from-red-50 to-orange-50"
+        isDark ? "bg-[cae9ff]" : "bg-gradient-to-br from-red-100 to-[cae9ff]"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
